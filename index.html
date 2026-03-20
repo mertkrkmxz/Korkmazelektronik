@@ -89,6 +89,23 @@
             margin-top: 20px;
         }
 
+        /* Ürünler için eklediğim küçük stil alanı - Tasarımı bozmaz */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .p-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .p-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+        .p-price { color: var(--primary); font-weight: bold; font-size: 1.2rem; margin-top: 10px; display: block; }
+
         .theme-btn {
             padding: 10px 20px;
             margin: 10px;
@@ -155,8 +172,11 @@
 
         <div id="satilik" class="tab-content">
             <h1 class="section-title">Satılık Eşyalarımız</h1>
-            <div class="card" style="text-align: center; border-style: dashed;">
-                <p style="font-size: 1.2rem; color: #ffab00;">ürünümüz aktif ama şuanda girilmedi :(</p>
+            <div id="product-container">
+                <div id="no-product" class="card" style="text-align: center; border-style: dashed;">
+                    <p style="font-size: 1.2rem; color: #ffab00;">ürünümüz aktif ama şuanda girilmedi :(</p>
+                </div>
+                <div id="product-list" class="product-grid"></div>
             </div>
         </div>
 
@@ -188,18 +208,32 @@
     </div>
 
     <script>
-        function showTab(tabId) {
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active-tab'));
-            document.getElementById(tabId).classList.add('active-tab');
+// index.html içine eklenecek veri çekme motoru
+async function fetchProducts() {
+    const USER = "mertkrkmxz";
+    const REPO = "Korkmazelektronik";
+    
+    try {
+        const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/urunler.json?t=${Date.now()}`);
+        const products = await res.json();
+        
+        const grid = document.getElementById('product-list'); // Eğer ID farklıysa düzeltiriz
+        const noProduct = document.getElementById('no-product');
+        
+        if (products.length > 0) {
+            noProduct.style.display = 'none';
+            grid.innerHTML = products.map(p => `
+                <div class="card" style="text-align: center;">
+                    <img src="${p.resim}" style="width:100%; height:180px; object-fit:cover; border-radius:10px;">
+                    <h3 style="margin-top:10px;">${p.ad}</h3>
+                    <p style="color:#6200ea; font-weight:bold; font-size:1.2rem;">${p.fiyat} TL</p>
+                </div>
+            `).join('');
         }
-
-        function setTheme(theme) {
-            const body = document.getElementById('mainBody');
-            body.classList.remove('light-theme', 'purple-theme');
-            if (theme === 'light') body.classList.add('light-theme');
-            else if (theme === 'purple') body.classList.add('purple-theme');
-        }
+    } catch (e) { console.log("Henüz ürün yok."); }
+}
+// Sayfa yüklendiğinde çalıştır
+fetchProducts();
     </script>
 </body>
 </html>
