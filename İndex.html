@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korkmaz Electronic | Teknik Servis & Satış</title>
+    <style>
+        /* Renk Değişkenleri */
+        :root {
+            --primary: #6200ea;
+            --bg-color: rgba(15, 15, 15, 0.9);
+            --text-color: #ffffff;
+            --accent: #03dac6;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Temalar */
+        body.light-theme {
+            --bg-color: rgba(240, 240, 240, 0.9);
+            --text-color: #121212;
+            --card-bg: rgba(0, 0, 0, 0.05);
+            --primary: #3700b3;
+        }
+
+        body.purple-theme {
+            --bg-color: rgba(45, 0, 80, 0.85);
+            --text-color: #f1f1f1;
+            --card-bg: rgba(255, 255, 255, 0.15);
+            --primary: #bb86fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: url('electronix.png') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-color);
+            transition: all 0.4s ease;
+            min-height: 100vh;
+        }
+
+        .overlay {
+            background: var(--bg-color);
+            min-height: 100vh;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Navigasyon */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .theme-controls button {
+            padding: 8px 15px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        /* Ana İçerik */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 50px 10%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .btn-contact {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body id="mainBody">
+
+    <div class="overlay">
+        <nav>
+            <div class="logo">Korkmaz Electronic</div>
+            <div class="theme-controls">
+                <button onclick="setTheme('dark')" style="background: #222; color: #fff;">Siyah</button>
+                <button onclick="setTheme('light')" style="background: #eee; color: #333;">Beyaz</button>
+                <button onclick="setTheme('purple')" style="background: #6200ea; color: #fff;">Mor</button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Geleceği Tamir Ediyoruz</h1>
+            <p>Telefon, Tablet ve Tüm Elektronik Cihazlarınız Uzman Ellerde.</p>
+            <a href="#" class="btn-contact">Hemen Teklif Al</a>
+        </section>
+
+        <section class="services">
+            <div class="card">
+                <h3>📱 Telefon Tamiri</h3>
+                <p>Ekran değişimi, batarya yenileme ve anakart onarımı garantili olarak yapılır.</p>
+            </div>
+            <div class="card">
+                <h3>💻 Laptop & Tablet</h3>
+                <p>Yazılımsal sorunlar ve donanım yükseltmeleri için en doğru adres.</p>
+            </div>
+            <div class="card">
+                <h3>🔌 Aksesuar</h3>
+                <p>Orijinal şarj aletleri, kulaklıklar ve koruyucu camlar stoklarımızda.</p>
+            </div>
+        </section>
+
+        <footer>
+            &copy; 2026 Korkmaz Electronic - Tüm Hakları Saklıdır.
+        </footer>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            const body = document.getElementById('mainBody');
+            body.classList.remove('light-theme', 'purple-theme');
+            
+            if (theme === 'light') {
+                body.classList.add('light-theme');
+            } else if (theme === 'purple') {
+                body.classList.add('purple-theme');
+            }
+            // Siyah (dark) varsayılan olduğu için class eklemeye gerek yok
+        }
+    </script>
+</body>
+</html>
