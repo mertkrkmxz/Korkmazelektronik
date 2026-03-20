@@ -3,136 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Korkmaz Electronic | Teknik Servis & Satış</title>
+    <title>Korkmaz Electronic | Profesyonel Teknik Servis</title>
     <style>
-        /* Renk Değişkenleri */
         :root {
             --primary: #6200ea;
-            --bg-color: rgba(15, 15, 15, 0.9);
+            --bg-overlay: rgba(15, 15, 15, 0.9);
             --text-color: #ffffff;
-            --accent: #03dac6;
             --card-bg: rgba(255, 255, 255, 0.1);
         }
 
-        /* Temalar */
         body.light-theme {
-            --bg-color: rgba(240, 240, 240, 0.9);
-            --text-color: #121212;
+            --bg-overlay: rgba(245, 245, 245, 0.95);
+            --text-color: #1a1a1a;
             --card-bg: rgba(0, 0, 0, 0.05);
             --primary: #3700b3;
         }
 
         body.purple-theme {
-            --bg-color: rgba(45, 0, 80, 0.85);
+            --bg-overlay: rgba(30, 0, 50, 0.9);
             --text-color: #f1f1f1;
             --card-bg: rgba(255, 255, 255, 0.15);
-            --primary: #bb86fc;
+            --primary: #d1b3ff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
         body {
             background: url('electronix.png') no-repeat center center fixed;
             background-size: cover;
-            color: var(--text-color);
-            transition: all 0.4s ease;
+            transition: 0.3s;
             min-height: 100vh;
         }
 
         .overlay {
-            background: var(--bg-color);
+            background: var(--bg-overlay);
             min-height: 100vh;
-            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            color: var(--text-color);
+            backdrop-filter: blur(10px);
         }
 
-        /* Navigasyon */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
-            background: rgba(0,0,0,0.3);
+            padding: 15px 8%;
+            background: rgba(0,0,0,0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: var(--primary);
-            text-transform: uppercase;
-        }
+        .logo { font-size: 22px; font-weight: bold; color: var(--primary); }
 
-        .theme-controls button {
-            padding: 8px 15px;
-            margin-left: 5px;
-            border: none;
-            border-radius: 5px;
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
             cursor: pointer;
-            font-weight: bold;
             transition: 0.3s;
         }
 
-        /* Ana İçerik */
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
+        .nav-links a:hover { color: var(--primary); }
+
+        .tab-content {
+            display: none;
+            padding: 40px 10%;
+            flex-grow: 1;
+            animation: fadeIn 0.5s ease;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
+        .active-tab { display: block; }
 
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 50px 10%;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        .section-title { font-size: 2.5rem; margin-bottom: 20px; border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 10px; }
+        
         .card {
             background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
-            text-align: center;
             border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.3s ease;
+            margin-top: 20px;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
+        .theme-btn {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        .card h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
+        iframe {
+            width: 100%;
+            height: 350px;
+            border-radius: 15px;
+            border: none;
+            margin-top: 20px;
         }
 
         footer {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
             text-align: center;
-            padding: 40px;
-            font-size: 0.9rem;
-            opacity: 0.7;
+            margin-top: auto;
+            border-top: 1px solid var(--primary);
         }
 
-        .btn-contact {
-            background: var(--primary);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 20px;
+        .insta-link {
+            color: var(--primary);
             text-decoration: none;
-            display: inline-block;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -141,50 +126,79 @@
     <div class="overlay">
         <nav>
             <div class="logo">Korkmaz Electronic</div>
-            <div class="theme-controls">
-                <button onclick="setTheme('dark')" style="background: #222; color: #fff;">Siyah</button>
-                <button onclick="setTheme('light')" style="background: #eee; color: #333;">Beyaz</button>
-                <button onclick="setTheme('purple')" style="background: #6200ea; color: #fff;">Mor</button>
+            <div class="nav-links">
+                <a onclick="showTab('ana-menu')">Ana Menü</a>
+                <a onclick="showTab('hakkimizda')">Hakkımızda</a>
+                <a onclick="showTab('satilik')">Satılık Eşyalar</a>
+                <a onclick="showTab('neredeyiz')">Neredeyiz</a>
+                <a onclick="showTab('ayarlar')">Ayarlar</a>
             </div>
         </nav>
 
-        <section class="hero">
-            <h1>Geleceği Tamir Ediyoruz</h1>
-            <p>Telefon, Tablet ve Tüm Elektronik Cihazlarınız Uzman Ellerde.</p>
-            <a href="#" class="btn-contact">Hemen Teklif Al</a>
-        </section>
+        <div id="ana-menu" class="tab-content active-tab">
+            <h1 class="section-title">Korkmaz Electronic</h1>
+            <p style="font-size: 1.2rem;">Hızlı servis, güvenilir çözüm. Teknolojiniz emin ellerde.</p>
+            <div class="card">
+                <h3>Neden Biz?</h3>
+                <p>Ayaş bölgesindeki en kapsamlı teknik servis hizmetini sunuyoruz. Şeffaf fiyatlandırma ve hızlı teslimat önceliğimizdir.</p>
+            </div>
+        </div>
 
-        <section class="services">
+        <div id="hakkimizda" class="tab-content">
+            <h1 class="section-title">Hakkımızda</h1>
             <div class="card">
-                <h3>📱 Telefon Tamiri</h3>
-                <p>Ekran değişimi, batarya yenileme ve anakart onarımı garantili olarak yapılır.</p>
+                <p style="font-size: 1.1rem; line-height: 1.6;">
+                    <strong>Korkmaz Electronic</strong>, bozulan elektronik eşyalar <strong>(Televizyon ve kumanda harici)</strong> bütün her şeyi tamir etmeye çalışır. Profesyonel ekipmanlarımızla cihazlarınızı ilk günkü haline getiriyoruz.
+                </p>
             </div>
+        </div>
+
+        <div id="satilik" class="tab-content">
+            <h1 class="section-title">Satılık Eşyalarımız</h1>
+            <div class="card" style="text-align: center; border-style: dashed;">
+                <p style="font-size: 1.2rem; color: #ffab00;">ürünümüz aktif ama şuanda girilmedi :(</p>
+            </div>
+        </div>
+
+        <div id="neredeyiz" class="tab-content">
+            <h1 class="section-title">Neredeyiz?</h1>
             <div class="card">
-                <h3>💻 Laptop & Tablet</h3>
-                <p>Yazılımsal sorunlar ve donanım yükseltmeleri için en doğru adres.</p>
+                <h3>📍 Adres Bilgisi bilgi: haritadaki konuma lütfen uymayınız tam adresimiz yazı olarak yazıyordur</h3>
+                <p>Ankara Ayaş Hekim Şaban Şifai caddesi</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12223.102604810756!2d32.1384724!3d40.0163351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d3345155f524d3%3A0xc4864111327f31be!2zSGVraW0gxZ5hYmFuIMWfaWZhaSwgMDY4NDAgQXlYxZ8vQW5rYXJh!5e0!3m2!1str!2str!4v1710000000000!5m2!1str!2str" allowfullscreen="" loading="lazy"></iframe>
             </div>
-            <div class="card">
-                <h3>🔌 Aksesuar</h3>
-                <p>Orijinal şarj aletleri, kulaklıklar ve koruyucu camlar stoklarımızda.</p>
+        </div>
+
+        <div id="ayarlar" class="tab-content">
+            <h1 class="section-title">Ayarlar</h1>
+            <div class="card" style="text-align: center;">
+                <p>Tema Seçenekleri:</p><br>
+                <button class="theme-btn" style="background: #222; color: white;" onclick="setTheme('dark')">Siyah</button>
+                <button class="theme-btn" style="background: #fff; color: #222; border: 1px solid #ccc;" onclick="setTheme('light')">Beyaz</button>
+                <button class="theme-btn" style="background: #6200ea; color: white;" onclick="setTheme('purple')">Mor</button>
             </div>
-        </section>
+        </div>
 
         <footer>
-            &copy; 2026 Korkmaz Electronic - Tüm Hakları Saklıdır.
+            <p>
+                Instagram: <a href="https://instagram.com/korkmazelectronic" class="insta-link">@korkmazelectronic</a> 
+                | Sayfamıza katıl! | <strong>korkmaz electronic bütün telifleri saklıdır</strong>
+            </p>
         </footer>
     </div>
 
     <script>
+        function showTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active-tab'));
+            document.getElementById(tabId).classList.add('active-tab');
+        }
+
         function setTheme(theme) {
             const body = document.getElementById('mainBody');
             body.classList.remove('light-theme', 'purple-theme');
-            
-            if (theme === 'light') {
-                body.classList.add('light-theme');
-            } else if (theme === 'purple') {
-                body.classList.add('purple-theme');
-            }
-            // Siyah (dark) varsayılan olduğu için class eklemeye gerek yok
+            if (theme === 'light') body.classList.add('light-theme');
+            else if (theme === 'purple') body.classList.add('purple-theme');
         }
     </script>
 </body>
